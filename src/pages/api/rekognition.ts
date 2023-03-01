@@ -6,7 +6,7 @@ type Data = {
   name: string
 }
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const config: RekognitionClientConfig = {
         region: "us-west-2",
         credentials: {
@@ -24,5 +24,5 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     const command = new DetectTextCommand(input);
     const response: DetectTextResponse = await client.send(command);
     console.log(response);
-    res.status(200).json({ text: response.TextDetections })
+    res.status(200).json({ text: response?.TextDetections })
 }

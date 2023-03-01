@@ -1,12 +1,13 @@
+// @ts-ignore: Object is possibly 'null'.
 export default class BarcodePicture {
-    width: Number = 320;
-    height: Number = 0;
+    width: any = 320;
+    height: any = 0;
     streaming: boolean = false;
-    video = null;
-    canvas = null;
-    photo = null;
-    startbutton = null;
-    dataUrl = null;
+    video: any = null;
+    canvas: any = null;
+    photo: HTMLElement = null;
+    startbutton: HTMLElement = null;
+    dataUrl: any = null;
     textDetected = ``;
 
 
@@ -47,7 +48,7 @@ export default class BarcodePicture {
 
       this.video.addEventListener(
         "canplay",
-        (ev) => {
+        (ev: any) => {
           if (!this.streaming) {
             this.height = this.video.videoHeight / (this.video.videoWidth / this.width);
   
@@ -70,7 +71,7 @@ export default class BarcodePicture {
   
       this.startbutton.addEventListener(
         "click",
-        (ev) => {
+        (ev: { preventDefault: () => void; }) => {
           this.takepicture();
           ev.preventDefault();
         },
@@ -119,11 +120,11 @@ export default class BarcodePicture {
           .then((data) => {
             console.log(data)
             let detection = document.getElementById("textdetected")
-            data.text.map((item) => {
+            data.text.map((item: { DetectedText: string; }) => {
               detection.innerHTML = item.DetectedText + "<br>"
             })
           });
-        photo.setAttribute("src", data);
+        this.photo.setAttribute("src", data);
       } else {
         this.clearPhoto();
       }
