@@ -7,6 +7,11 @@ type Data = {
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+
+    if(req.method != "POST") {
+        res.status(400).json({ text: "metodo no permitido" })
+    }
+
     const config: RekognitionClientConfig = {
         region: "us-west-2",
         credentials: {
