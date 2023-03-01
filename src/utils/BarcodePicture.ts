@@ -115,7 +115,7 @@ export default class BarcodePicture {
         // },'image/png');
 
 
-        fetch("http://localhost:3000/api/rekognition", { method: "POST", body: this.dataUrl })
+        fetch("https://nextjs-amazon-rekognition.vercel.app/api/rekognition", { method: "POST", body: this.dataUrl })
           .then((response) => response.json())
           .then((data) => {
             console.log(data)
